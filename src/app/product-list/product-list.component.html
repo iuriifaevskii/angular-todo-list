@@ -1,0 +1,15 @@
+<h2>Products</h2>
+<p>{{ title }}</p>
+<p>{{ subTitle }}</p>
+<button (click)="addProduct()">add product</button>
+<div *ngFor="let product of productsList">
+    <h3>
+        <a [title]="product.title + ' details'">
+          {{ product.title }}
+        </a>
+    </h3>
+    <p *ngIf="product.completed">
+        completed: {{ product.completed }}
+    </p>
+    <button>remove</button>
+</div>

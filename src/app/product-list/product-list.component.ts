@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductListService } from './product-list.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'product-list',
@@ -10,10 +11,22 @@ export class ProductListComponent implements OnInit {
   title: string;
   subTitle: string;
   productsList: object[];
+  productForm;
   
-  constructor(private productListService: ProductListService) {
+  constructor(
+    private productListService: ProductListService,
+    private formBuilder: FormBuilder
+  ) {
     this.title = 'Products';
     this.subTitle = 'My List';
+    this.productForm = this.formBuilder.group({
+      title: '',
+      body: ''
+    });
+  }
+
+  ngOnInit() {
+    this.getProducts();
   }
 
   getProducts(): void {
@@ -23,16 +36,25 @@ export class ProductListComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    this.getProducts();
+  addProduct(newProduct) {
+    const { title, body } = newProduct;
+    this.productListService.createProduct(title, body).then(status => {
+      if (status === 201) {
+        this.productsList.unshift(newProduct);
+        this.productForm.reset();
+      } else {
+        console.log('Error: can not create a product');
+      }
+    });
   }
 
-  addProduct() {
-    const newProduct = {
-      id: '9999',
-      title: 'new Product',
-      completed: true,
-    };
-    this.productsList.unshift(newProduct);
+  removeProduct(productID) {
+    this.productListService.deleteProduct(productID).then(status => {
+      if (status === 200) {
+        this.productsList = this.productsList.filter(product => product['id'] !== productID);
+      } else {
+        console.log('Error: can not delete');
+      }
+    });    
   }
 }

@@ -1,7 +1,21 @@
 <h2>Products</h2>
 <p>{{ title }}</p>
 <p>{{ subTitle }}</p>
-<button (click)="addProduct()">add product</button>
+<form [formGroup]="productForm" (ngSubmit)="addProduct(productForm.value)">
+    <div>
+      <label for="title">
+        Title
+      </label>
+      <input id="title" type="text" formControlName="title">
+    </div>
+    <div>
+      <label for="body">
+        Body
+      </label>
+      <input id="body" type="text" formControlName="body">
+    </div>
+    <button type="submit">add product</button>
+</form>
 <div *ngFor="let product of productsList">
     <h3>
         <a [title]="product.title + ' details'">
@@ -9,7 +23,7 @@
         </a>
     </h3>
     <p *ngIf="product.completed">
-        completed: {{ product.completed }}
+        body: {{ product.body }}
     </p>
-    <button>remove</button>
+    <button (click)="removeProduct(product.id)">remove</button>
 </div>

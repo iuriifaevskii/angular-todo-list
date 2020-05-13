@@ -17,13 +17,11 @@
     <button type="submit">add product</button>
 </form>
 <div *ngFor="let product of productsList">
-    <h3>
-        <a [title]="product.title + ' details'">
-          {{ product.title }}
-        </a>
-    </h3>
-    <p *ngIf="product.completed">
-        body: {{ product.body }}
-    </p>
-    <button (click)="removeProduct(product.id)">remove</button>
+  <single-product 
+    [productID]="product.id"
+    [productTitle]="product.title"
+    [productBody]="product.body"
+    (removeProduct)="removeProduct($event)"
+  >
+  </single-product>
 </div>

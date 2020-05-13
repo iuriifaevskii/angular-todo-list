@@ -1,0 +1,11 @@
+<div>
+    <h3>
+        <a [title]="productTitle + ' details'">
+          {{ productTitle }}
+        </a>
+    </h3>
+    <p *ngIf="productBody">
+        body: {{ productBody }}
+    </p>
+    <button (click)="remove(productID)">remove</button>
+</div>

@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ProductListComponent } from './product-list.component';
-import { SingleProductComponent } from './single-product/single-product.component';
+import { SingleProductComponent } from './product-list/single-product/single-product.component';
 import { CreateProductForm } from './create-product-form/create-product-form.component';
-import { ProductListService } from './product-list.service';
-import { from } from 'rxjs';
+import { ProductListPageService } from './product-list-page.service';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductListPageComponent } from './product-list-page.component';
 
 @NgModule({
   declarations: [
     ProductListComponent,
     SingleProductComponent,
     CreateProductForm,
+    ProductListComponent,
+    ProductListPageComponent,
   ],
   imports: [
     CommonModule,
@@ -20,8 +22,8 @@ import { from } from 'rxjs';
     ReactiveFormsModule
   ],
   providers: [
-    ProductListService,
+    ProductListPageService,
   ],
   bootstrap: [ProductListComponent]
 })
-export class ProductListModule { }
+export class ProductListPageModule { }

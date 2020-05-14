@@ -1,0 +1,9 @@
+<div *ngFor="let product of products">
+  <single-product
+    [productID]="product.id"
+    [productTitle]="product.title"
+    [productBody]="product.body"
+    (removeProduct)="removeOne($event)"
+  >
+  </single-product>
+</div>

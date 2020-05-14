@@ -1,0 +1,6 @@
+<h2>Product Page</h2>
+<p>{{ title }}</p>
+<p>{{ subTitle }}</p>
+
+<create-product-form (addProduct)="addProduct($event)"></create-product-form>
+<product-list (removeProduct)="removeProduct($event)" [products]="productsList"></product-list>

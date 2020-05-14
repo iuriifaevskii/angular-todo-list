@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 
-export class ProductListService {
+export class ProductListPageService {
 
   constructor() { }
   baseURL = 'https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts';

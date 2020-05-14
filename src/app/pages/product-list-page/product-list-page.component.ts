@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductListService } from './product-list.service';
+import { ProductListPageService } from './product-list-page.service';
 
 @Component({
-  selector: 'product-list',
-  templateUrl: './product-list.component.html',
+  selector: 'product-list-page',
+  templateUrl: './product-list-page.component.html',
 })
 
-export class ProductListComponent implements OnInit {
+export class ProductListPageComponent implements OnInit {
   title: string;
   subTitle: string;
   productsList: object[];
   
   constructor(
-    private productListService: ProductListService,
+    private productListService: ProductListPageService,
   ) {
     this.title = 'Products';
     this.subTitle = 'My List';

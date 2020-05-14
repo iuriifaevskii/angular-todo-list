@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductListService } from './product-list.service';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'product-list',
@@ -11,18 +10,12 @@ export class ProductListComponent implements OnInit {
   title: string;
   subTitle: string;
   productsList: object[];
-  productForm;
   
   constructor(
     private productListService: ProductListService,
-    private formBuilder: FormBuilder
   ) {
     this.title = 'Products';
     this.subTitle = 'My List';
-    this.productForm = this.formBuilder.group({
-      title: '',
-      body: ''
-    });
   }
 
   ngOnInit() {
@@ -32,16 +25,19 @@ export class ProductListComponent implements OnInit {
   getProducts(): void {
     this.productListService.fetchProducts()
       .then(res => {
-        this.productsList = res;
+        if (Array.isArray(res)) {
+          this.productsList = res;
+        } else {
+          this.productsList = [];
+        }
       });
   }
 
   addProduct(newProduct) {
     const { title, body } = newProduct;
-    this.productListService.createProduct(title, body).then(status => {
-      if (status === 201) {
-        this.productsList.unshift(newProduct);
-        this.productForm.reset();
+    this.productListService.createProduct(title, body).then(response => {
+      if (response && response.id) {
+        this.productsList.unshift({...newProduct, id: response.id});
       } else {
         console.log('Error: can not create a product');
       }

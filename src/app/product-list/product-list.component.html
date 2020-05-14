@@ -1,21 +1,8 @@
 <h2>Products</h2>
 <p>{{ title }}</p>
 <p>{{ subTitle }}</p>
-<form [formGroup]="productForm" (ngSubmit)="addProduct(productForm.value)">
-    <div>
-      <label for="title">
-        Title
-      </label>
-      <input id="title" type="text" formControlName="title">
-    </div>
-    <div>
-      <label for="body">
-        Body
-      </label>
-      <input id="body" type="text" formControlName="body">
-    </div>
-    <button type="submit">add product</button>
-</form>
+<create-product-form (addProduct)="addProduct($event)">
+</create-product-form>
 <div *ngFor="let product of productsList">
   <single-product 
     [productID]="product.id"
